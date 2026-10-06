@@ -1,0 +1,14 @@
+# Base de dados e cópias em CSV (baixe com: python scripts/baixar_base.py)
+data/
+
+# Manual do Atlas (baixado pelo mesmo script)
+docs/referencias/
+
+# Ambiente virtual
+.venv/
+
+# Python
+__pycache__/
+
+# Jupyter
+.ipynb_checkpoints/
