@@ -36,7 +36,7 @@ Classificação supervisionada que identifica se um desastre registrado no Atlas
 ### 1. Clonar o repositório
 
 ```bash
-git clone TODO_URL_DO_REPOSITORIO
+git clone https://github.com/sergiobfj/atlas-digital.git
 cd atlas-digital
 ```
 
