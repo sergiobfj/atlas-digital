@@ -11,7 +11,7 @@ Classificação supervisionada que identifica se um desastre registrado no Atlas
 | Problema | Os desastres registrados no Brasil reúnem eventos de causas opostas, como secas e inundações. Entender quais características de um registro diferenciam esses dois grupos ajuda a interpretar padrões e a apoiar ações de prevenção. |
 | Objetivo | Treinar e avaliar modelos de classificação que separem desastres por falta e por excesso de chuva, e apresentar o resultado ao público em um app Streamlit. |
 | Base de dados | [Atlas Digital de Desastres no Brasil](https://atlasdigital.mdr.gov.br) (Sedec/MIDR e Ceped/UFSC) |
-| Registros x atributos | TODO |
+| Registros x atributos | 76.190 registros x 70 atributos (aba `Atlas Valores Corrigidos`) |
 | Variável-alvo | Tipo de desastre agrupado em duas classes: **FALTA** de chuva (estiagem, seca) e **EXCESSO** de chuva (inundação, enxurrada, alagamento). Os demais tipos ficam fora do recorte. Proporção entre as classes: TODO |
 | App publicado | TODO |
 | Apresentação final | 30/11/2026 |
@@ -21,10 +21,37 @@ Classificação supervisionada que identifica se um desastre registrado no Atlas
 | Integrante | GitHub |
 | --- | --- |
 | Sergio Barbosa de Fontes Júnior | [@sergiobfj](https://github.com/sergiobfj) |
-| A definir | A definir |
-| A definir | A definir |
-| A definir | A definir |
-| A definir | A definir |
+| A Adicionar | A Adicionar |
+| A Adicionar | A Adicionar |
+| A Adicionar | A Adicionar |
+| A Adicionar | A Adicionar |
+
+## Dados
+
+| Item | Detalhe |
+| --- | --- |
+| Fonte oficial | [Página de downloads do Atlas Digital](https://atlasdigital.mdr.gov.br/paginas/downloads.xhtml) |
+| Arquivo | `BD_Atlas_1991_2025_v1.1_2026.08.06_Consolidado.xlsx` (68,2 MB) |
+| Versão | v1.1, de 06/08/2026 |
+| Aba usada | `Atlas Valores Corrigidos` |
+| Manual | `Atlas_Digital_Desastres_Manual_Aplicacao.pdf`, salvo em `docs/referencias/` |
+
+O xlsx tem quatro abas:
+
+| Aba | Conteúdo |
+| --- | --- |
+| `Atlas Valores Originais` | Registros com os valores monetários do ano de registro |
+| `Cálculo Correção` | Fatores de correção pelo IGP-DI para valores de dezembro de 2024 |
+| `Atlas Valores Corrigidos` | Registros com os valores monetários corrigidos. **É a aba usada no projeto.** |
+| `Grupos de Desastres` | Tabela de apoio que relaciona código Cobrade, tipologia e grupo de desastre |
+
+Para baixar a base e o manual:
+
+```bash
+python scripts/baixar_base.py
+```
+
+O script usa só a biblioteca padrão do Python. Se um arquivo já existir, ele não baixa de novo, a menos que receba `--force`. A base e o manual ficam fora do Git.
 
 ## Como rodar
 
@@ -72,12 +99,13 @@ nbstripout --install
 
 Rode uma vez em cada clone, com o ambiente ativado. O comando registra um filtro no Git que remove as saídas dos notebooks no `git add`, o que deixa os diffs menores e reduz conflitos.
 
-### 5. Colocar a base no lugar
+### 5. Baixar a base
 
-1. Baixe a base em [atlasdigital.mdr.gov.br](https://atlasdigital.mdr.gov.br) (TODO: descrever o caminho de download e o formato do arquivo).
-2. Salve o arquivo em `data/raw/`, criando a pasta se ela não existir (TODO: nome do arquivo esperado pelos notebooks).
+```bash
+python scripts/baixar_base.py
+```
 
-A pasta `data/` fica fora do Git. Nunca faça commit da base.
+A base vai para `data/raw/` e o manual para `docs/referencias/`. As duas pastas ficam fora do Git. Nunca faça commit da base.
 
 ### 6. Rodar a interface
 
