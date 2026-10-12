@@ -21,7 +21,7 @@ Classificação supervisionada que identifica se um desastre registrado no Atlas
 | Integrante | GitHub |
 | --- | --- |
 | Sergio Barbosa de Fontes Júnior | [@sergiobfj](https://github.com/sergiobfj) |
-| A Adicionar | A Adicionar |
+| Gabriel de Lemos Cardim | [@gabelemos](https://github.com/gabelemos) |
 | A Adicionar | A Adicionar |
 | A Adicionar | A Adicionar |
 | A Adicionar | A Adicionar |
