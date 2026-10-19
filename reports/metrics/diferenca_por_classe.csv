@@ -1,0 +1,47 @@
+coluna,pct_gt0_FALTA,pct_gt0_EXCESSO,diferenca_pp
+DM_total_danos_materiais,1.6,54.72,53.12
+DM_Obras de Infra Valor,1.04,48.49,47.45
+DH_DESALOJADOS,0.6,44.55,43.94
+DM_Uni Habita Danificadas,0.14,39.86,39.72
+DM_Uni Habita Valor,0.24,38.72,38.49
+DM_Obras de Infra Danificadas,0.36,35.29,34.93
+DH_DESABRIGADOS,0.25,31.77,31.52
+PEPL_Abast de água pot(R$),44.58,13.97,30.6
+PEPR_Agricultura (R$),58.37,32.64,25.73
+DM_Obras de Infra Destruidas,0.12,24.2,24.08
+PEPR_Pecuária (R$),45.34,21.57,23.77
+PEPL_Tran loc/reg/l_curso (R$),1.52,23.89,22.37
+DM_Uni Habita Destruidas,0.12,22.49,22.37
+PEPR_total_privado,59.66,39.22,20.43
+PEPL_Ensino (R$),2.38,17.58,15.21
+DM_Inst Ensino Valor,0.18,14.78,14.61
+PEPL_Sis limp e rec lixo (R$),0.53,14.97,14.43
+DM_Inst Ensino Danificadas,0.17,14.31,14.14
+PE_PLePR,63.4,49.74,13.66
+PEPL_sist de esgotos sanit(R$),0.38,12.4,12.02
+DH_FERIDOS,0.35,10.93,10.59
+DM_Inst Saúde Danificadas,0.13,8.85,8.72
+DM_Inst Saúde Valor,0.13,8.8,8.67
+DH_total_danos_humanos_diretos,44.63,52.99,8.36
+DM_Inst Comuni Valor,0.42,8.71,8.29
+PEPL_Assis_méd e emergên(R$),4.93,12.99,8.06
+DH_ENFERMOS,1.69,9.09,7.4
+DM_Inst Comuni Danificadas,0.31,7.54,7.23
+PEPL_distrib energia (R$),0.4,6.47,6.07
+PEPR_Serviços (R$),5.71,10.68,4.97
+PEPR_Indústria (R$),2.24,6.72,4.48
+PEPL_total_publico,46.61,42.33,4.27
+DH_MORTOS,0.1,4.33,4.23
+PEPL_Sis cont pragas (R$),0.28,2.92,2.64
+PEPR_Comércio (R$),1.99,4.35,2.36
+DM_Inst Saúde Destruidas,0.05,2.25,2.2
+PEPL_Telecomunicações (R$),0.12,2.3,2.18
+DM_Inst Ensino Destruidas,0.03,1.9,1.87
+PEPL_Distrib combustíveis(R$),0.79,2.65,1.86
+PEPL_Segurança pública (R$),0.19,1.95,1.76
+DM_Inst Comuni Destruidas,0.08,1.54,1.46
+DH_OUTROS AFETADOS,44.35,43.12,1.23
+DH_DESAPARECIDOS,0.01,1.05,1.04
+DM_Inst Serviços Valor,0.05,0.9,0.85
+DM_Inst Serviços Danificadas,0.04,0.74,0.7
+DM_Inst Serviços Destruidas,0.04,0.61,0.57
