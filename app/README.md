@@ -1,19 +1,13 @@
-# Organização da interface
+# Como substituir os dados mockados
 
-## Onde cada pessoa mexe
+Não é preciso alterar nenhuma página do Streamlit.
 
-| Se você precisa... | Arquivo certo |
-| --- | --- |
-| Alterar a tela inicial | `Home.py` |
-| Alterar textos, etapas ou gráficos da análise | `content.py` |
-| Alterar a estrutura visual de uma página | `pages/` |
-| Alterar cores, espaçamentos e componentes visuais comuns | `ui.py` |
-| Integrar os resultados reais do backend | `results_repository.py` e `../reports/metrics/README.md` |
+Quando o backend estiver pronto, gere estes três arquivos na pasta `reports/metrics/`:
 
-## Regra simples
+1. `comparacao.csv`
+2. `matrizes_confusao.json`
+3. `curvas_roc.csv`
 
-As páginas em `pages/` devem apenas montar a tela. Não coloque nelas textos longos, valores mockados ou leitura direta de CSV/JSON. Isso fica, respectivamente, em `content.py` e `results_repository.py`.
+A tela **Resultados** detecta esses arquivos automaticamente e deixa de usar os mocks.
 
-## Para desmockar os resultados
-
-Consulte [`reports/metrics/README.md`](../reports/metrics/README.md). O backend grava três arquivos em `reports/metrics/` e a tela Resultados passa a usá-los automaticamente. Não é preciso modificar nenhuma página.
+Os formatos e exemplos de cada arquivo estão em [`reports/metrics/README.md`](../reports/metrics/README.md).
