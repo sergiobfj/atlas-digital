@@ -1,27 +1,25 @@
 from pathlib import Path
+
 import streamlit as st
+
+from content import GRAPH_ANALYSES
 from ui import apply_atlas_style, header, reading
 
+# CONFIGURAÇÃO E CAMINHO DOS GRÁFICOS EXPORTADOS PELOS NOTEBOOKS
 st.set_page_config(page_title="Análise Gráfica | Atlas Digital", page_icon="📊", layout="wide")
 apply_atlas_style()
 
-ROOT = Path(__file__).resolve().parents[2]
-FIGURES = ROOT / "reports" / "figures"
+FIGURES_DIR = Path(__file__).resolve().parents[2] / "reports" / "figures"
 
+# CABEÇALHO
 header("Análise gráfica", "Quatro recortes para entender como os impactos, o calendário e o território diferenciam FALTA e EXCESSO de chuva.")
 
-charts = [
-    ("Danos humanos e moradias", "Ocorrências de EXCESSO apresentam percentuais muito maiores de desalojados, desabrigados e danos a moradias. Isso evidencia impactos súbitos e concentrados."),
-    ("Prejuízos econômicos", "Em FALTA, agricultura, pecuária e abastecimento de água aparecem com mais frequência, mostrando um impacto prolongado sobre atividades rurais e serviços."),
-    ("Registros por mês", "A sazonalidade ajuda a contextualizar os eventos: o excesso de chuva se concentra em períodos chuvosos, enquanto a falta tem uma distribuição própria no ano."),
-    ("Classe por região", "A composição muda entre as regiões brasileiras. Essa diferença regional é um sinal útil, mas não substitui os indicadores de impacto no modelo."),
-]
-
-tabs = st.tabs([title for title, _ in charts])
-for index, (tab, (title, interpretation)) in enumerate(zip(tabs, charts), start=1):
+# GRÁFICOS — nomes dos PNGs e leituras ficam em app/content.py.
+tabs = st.tabs([chart["title"] for chart in GRAPH_ANALYSES])
+for tab, chart in zip(tabs, GRAPH_ANALYSES):
     with tab:
-        image = FIGURES / f"grafico{index}_{['danos_humanos_moradias', 'prejuizos_economicos', 'registros_por_mes', 'classe_por_regiao'][index - 1]}.png"
-        st.image(str(image), caption=title, width="stretch")
-        reading(interpretation)
+        image_path = FIGURES_DIR / chart["figure"]
+        st.image(str(image_path), caption=chart["title"], width="stretch")
+        reading(chart["insight"])
 
 st.caption("Gráficos produzidos a partir da análise exploratória do projeto. Não são métricas de desempenho dos modelos.")
