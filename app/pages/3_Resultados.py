@@ -2,6 +2,8 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
+# Não leia CSV/JSON diretamente nesta página. O adaptador abaixo concentra a
+# troca entre mock e backend; veja app/mock_data.py e reports/metrics/README.md.
 from mock_data import best_model, load_comparison, load_confusion_matrices, load_roc_curves
 from ui import apply_atlas_style, header, reading
 

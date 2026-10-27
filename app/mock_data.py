@@ -1,8 +1,14 @@
-"""Adaptadores temporários de resultados para a interface Streamlit.
+"""Ponto único de integração entre o backend e as páginas de resultados.
 
-O backend deve gravar os arquivos sem o sufixo ``_mock`` em
-``reports/metrics``. Enquanto eles não existem, os dados desta camada deixam
-claro que a interface está em modo demonstração.
+COMO DESMOCKAR (não é preciso alterar as páginas Streamlit):
+1. Grave os três arquivos reais em ``reports/metrics`` com os nomes e colunas
+   documentados em ``reports/metrics/README.md``.
+2. Ao encontrar um arquivo real, cada função abaixo o prioriza e retorna
+   ``False`` como segundo valor. A interface então remove o aviso de demonstração.
+3. Os arquivos ``*_mock`` continuam apenas como fallback para desenvolvimento.
+
+Se o contrato do backend mudar, ajuste somente esta camada adaptadora. Não
+espalhe leitura de CSV/JSON pelas páginas da interface.
 """
 from __future__ import annotations
 
@@ -17,7 +23,7 @@ METRICS_DIR = ROOT / "reports" / "metrics"
 
 
 def _read_or_mock(filename: str, mock_filename: str) -> tuple[pd.DataFrame, bool]:
-    """Prioriza a saída do backend; retorna ``is_mock`` quando usa o fallback."""
+    """Lê o arquivo do backend; sem ele, usa o fallback visual temporário."""
     production_path = METRICS_DIR / filename
     if production_path.exists():
         return pd.read_csv(production_path), False
@@ -25,11 +31,16 @@ def _read_or_mock(filename: str, mock_filename: str) -> tuple[pd.DataFrame, bool
 
 
 def load_comparison() -> tuple[pd.DataFrame, bool]:
+    # BACKEND: crie reports/metrics/comparacao.csv com as colunas do README.
+    # Quando esse arquivo existir, comparacao_mock.csv deixa de ser utilizado.
     return _read_or_mock("comparacao.csv", "comparacao_mock.csv")
 
 
 def load_confusion_matrices() -> tuple[dict[str, list[list[int]]], bool]:
-    """Contrato futuro: ``matrizes_confusao.json`` com modelo -> matriz 2x2."""
+    """Retorna ``modelo -> [[real FALTA], [real EXCESSO]]`` em matriz 2x2."""
+    # BACKEND: crie reports/metrics/matrizes_confusao.json conforme o README.
+    # A ordem aceita pela interface é: linhas reais FALTA/EXCESSO e colunas
+    # previstas FALTA/EXCESSO.
     path = METRICS_DIR / "matrizes_confusao.json"
     if path.exists():
         with path.open(encoding="utf-8") as file:
@@ -42,7 +53,9 @@ def load_confusion_matrices() -> tuple[dict[str, list[list[int]]], bool]:
 
 
 def load_roc_curves() -> tuple[dict[str, pd.DataFrame], bool]:
-    """Contrato futuro: ``curvas_roc.csv`` com modelo, fpr e tpr."""
+    """Retorna pontos ROC agrupados por modelo."""
+    # BACKEND: crie reports/metrics/curvas_roc.csv com modelo, fpr e tpr.
+    # Um modelo pode ter quantos pontos forem necessários; não há limite fixo.
     path = METRICS_DIR / "curvas_roc.csv"
     if path.exists():
         data = pd.read_csv(path)
@@ -60,4 +73,5 @@ def load_roc_curves() -> tuple[dict[str, pd.DataFrame], bool]:
 
 
 def best_model(comparison: pd.DataFrame) -> pd.Series:
+    # Regra visível e fácil de alterar caso o critério mude no projeto.
     return comparison.loc[comparison["AUROC"].idxmax()]
