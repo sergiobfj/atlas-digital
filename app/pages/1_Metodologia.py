@@ -1,28 +1,25 @@
 import streamlit as st
-from content import CLASS_DESCRIPTIONS, METHODOLOGY_STEPS
+from content import DATA_CONTRACT, METHODOLOGY_STEPS, PIPELINE_CONTRACTS
 from ui import apply_atlas_style, header
 
-# CONFIGURAÇÃO DA PÁGINA
-st.set_page_config(page_title="Metodologia | Atlas Digital", page_icon="🧭", layout="wide")
+st.set_page_config(page_title="Metodologia | Chuvas de Caruaru", page_icon="🧭", layout="wide")
 apply_atlas_style()
-
-# CABEÇALHO
-header("Metodologia", "Do dado bruto à avaliação dos modelos: um percurso explicável, com escolhas feitas para evitar conclusões enganosas.")
-
-st.info("Esta página descreve o processo planejado. Resultados de desempenho aparecem como dados mockados na página Resultados até a integração com o backend.")
-
-# ETAPAS — o conteúdo fica em app/content.py para facilitar revisão textual.
-tabs = st.tabs([f"{step['number']}. {step['title']}" for step in METHODOLOGY_STEPS])
-for tab, step in zip(tabs, METHODOLOGY_STEPS):
+header("Metodologia", "Fluxo proposto para transformar os registros meteorológicos em uma análise reproduzível.", "ATLAS CLIMÁTICO · CARUARU/PE")
+st.info("Roteiro de implementação. Nenhuma métrica de modelo é exibida antes da entrega e validação dos artefatos reais.")
+tabs = st.tabs([f"{number}. {title}" for number, title, _ in METHODOLOGY_STEPS])
+for tab, (_, title, description) in zip(tabs, METHODOLOGY_STEPS):
     with tab:
-        st.subheader(step["title"])
-        st.write(step["description"])
-        if detail := step.get("detail"):
-            st.markdown(detail)
-
-# CLASSES — também editáveis em app/content.py.
+        st.subheader(title)
+        st.write(description)
 st.divider()
-st.subheader("O que cada classe representa")
-for column, (name, description) in zip(st.columns(2), CLASS_DESCRIPTIONS):
-    with column:
-        st.markdown(f"**{name}**\n\n{description}")
+st.subheader("Contrato para integração")
+path, *columns = DATA_CONTRACT
+st.code(f"{path}\nColunas esperadas: {', '.join(columns)}", language=None)
+st.caption("Com a base no caminho acima, o frontend deixa de gerar os dados demonstrativos automaticamente.")
+
+st.subheader("Artefatos esperados do backend")
+st.caption("Os caminhos abaixo são contratos de integração. A interface não fabrica métricas, ganhos de informação nem resultados de modelo.")
+for title, artifact_path, description in PIPELINE_CONTRACTS:
+    with st.expander(title):
+        st.code(artifact_path, language=None)
+        st.write(description)

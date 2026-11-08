@@ -1,4 +1,0 @@
-Modelo,AUROC,F1,Sensibilidade,Especificidade
-Regressão logística,0.842,0.781,0.770,0.851
-Random forest,0.901,0.842,0.818,0.912
-XGBoost,0.918,0.861,0.852,0.924
